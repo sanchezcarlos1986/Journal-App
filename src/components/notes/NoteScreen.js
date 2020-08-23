@@ -1,7 +1,7 @@
 import React from 'react';
 import {NotesAppBar} from '~components';
 
-export default function NoteScreen() {
+const NoteScreen = () => {
   return (
     <div className="notes__main-content">
       <NotesAppBar />
@@ -15,8 +15,7 @@ export default function NoteScreen() {
         <textarea
           type="text"
           placeholder="What happened today?"
-          className="notes__textarea"
-        ></textarea>
+          className="notes__textarea"></textarea>
 
         <figure className="notes__image">
           <img
@@ -27,4 +26,6 @@ export default function NoteScreen() {
       </div>
     </div>
   );
-}
+};
+
+export default NoteScreen;
