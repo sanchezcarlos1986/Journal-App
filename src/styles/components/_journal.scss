@@ -1,0 +1,84 @@
+.journal {
+  &__main-content {
+    display: flex;
+  }
+
+  &__sidebar {
+    background: $dark-grey;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 0 10px;
+    width: 40%;
+
+    &-navbar {
+      display: flex;
+      justify-content: space-between;
+
+      h3 {
+        font-weight: lighter;
+
+        span {
+          margin-left: 4px;
+        }
+      }
+    }
+  }
+
+  &__new-entry {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 30px;
+
+    &:hover {
+      color: darken($color: $white, $amount: 20);
+      transition: color 0.3s;
+    }
+  }
+
+  &__entries {
+    flex: 1 1 auto;
+    margin-top: 30px;
+    overflow-y: scroll;
+  }
+
+  &__entry {
+    background: $white;
+    border-radius: 4px;
+    color: $dark-grey;
+    display: flex;
+    margin-bottom: 10px;
+    overflow: hidden;
+
+    &-picture {
+      flex-shrink: 0;
+      height: 75px;
+      width: 75px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &-body {
+      padding: 10px;
+    }
+    &-title {
+      font-size: 14px;
+    }
+    &-content {
+      font-size: 11px;
+    }
+    &-date-box {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5px;
+    }
+  }
+}
