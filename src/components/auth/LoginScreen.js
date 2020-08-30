@@ -1,23 +1,40 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {useForm} from '~hooks';
+import {useDispatch} from 'react-redux';
+import {login} from '~actions';
 
-export default function LoginScreen() {
+const LoginScreen = () => {
+  const dispatch = useDispatch();
+
+  const [values, handleInputChange] = useForm({});
+
+  const handleLogin = e => {
+    e.preventDefault();
+
+    dispatch(login(12345, 'Carlos'));
+  };
+
   return (
     <div>
       <h3 className="auth__title">Login</h3>
-      <form>
+      <form onSubmit={handleLogin}>
         <input
           type="email"
           placeholder="Email"
           name="email"
           className="auth__input"
           autoComplete="off"
+          onChange={handleInputChange}
+          defaultValue={values.email}
         />
         <input
           type="password"
           placeholder="Password"
           name="password"
           className="auth__input"
+          onChange={handleInputChange}
+          defaultValue={values.password}
         />
         <button className="btn btn-primary btn-block" type="submit">
           Login
@@ -44,4 +61,6 @@ export default function LoginScreen() {
       </form>
     </div>
   );
-}
+};
+
+export default LoginScreen;

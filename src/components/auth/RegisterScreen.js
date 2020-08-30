@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-export default function RegisterScreen() {
+const RegisterScreen = () => {
   return (
     <div>
       <h3 className="auth__title">Register</h3>
@@ -41,4 +41,6 @@ export default function RegisterScreen() {
       </form>
     </div>
   );
-}
+};
+
+export default RegisterScreen;
