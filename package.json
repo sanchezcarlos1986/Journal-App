@@ -94,6 +94,7 @@
     "~types": "src/types/",
     "~components": "src/components/",
     "~reducers": "src/reducers/",
-    "~actions": "src/actions/"
+    "~actions": "src/actions/",
+    "~firebase": "src/firebase/"
   }
 }

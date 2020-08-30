@@ -1,1 +1,3 @@
-export {default as login} from './auth';
+import {login, loginWithEmail, loginWithGoogle} from './auth';
+
+export {login, loginWithEmail, loginWithGoogle};
