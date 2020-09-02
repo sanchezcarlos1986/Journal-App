@@ -1,7 +1,7 @@
 import {types} from '~types';
 import {firebase, googleAuthProvider} from '~firebase/firebase-config';
 
-export const loginWithEmail = (email, password) => {
+const loginWithEmail = (email, password) => {
   return dispatch => {
     setTimeout(() => {
       dispatch(login(123, 'カルロスさん'));
@@ -9,7 +9,7 @@ export const loginWithEmail = (email, password) => {
   };
 };
 
-export const loginWithGoogle = () => {
+const loginWithGoogle = () => {
   return dispatch => {
     firebase
       .auth()
@@ -18,7 +18,9 @@ export const loginWithGoogle = () => {
   };
 };
 
-export const login = (uid, displayName) => ({
+const login = (uid, displayName) => ({
   type: types.login,
   payload: {uid, displayName},
 });
+
+export default {login, loginWithEmail, loginWithGoogle};

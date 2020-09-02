@@ -2,10 +2,11 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {useForm} from '~hooks';
 import {useDispatch} from 'react-redux';
-import {loginWithEmail, loginWithGoogle} from '~actions';
+import {authActions} from '~actions';
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
+  const {loginWithEmail, loginWithGoogle} = authActions;
 
   const [values, handleInputChange] = useForm({});
 

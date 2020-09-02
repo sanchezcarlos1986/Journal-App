@@ -1,3 +1,2 @@
-import {login, loginWithEmail, loginWithGoogle} from './auth';
-
-export {login, loginWithEmail, loginWithGoogle};
+export {default as authActions} from './auth';
+export {default as uiActions} from './ui';
