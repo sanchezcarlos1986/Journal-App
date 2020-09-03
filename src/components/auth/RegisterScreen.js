@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import validator from 'validator';
 import {useDispatch, useSelector} from 'react-redux';
-import {uiActions} from '~actions';
+import {authActions, uiActions} from '~actions';
 import {useForm} from '~hooks';
 
 const RegisterScreen = () => {
@@ -12,17 +12,22 @@ const RegisterScreen = () => {
   } = useSelector(state => state);
 
   const {setError, removeError} = uiActions;
-  const [values, handleInputChange] = useForm({});
+  const {registerWithEmail} = authActions;
+
+  const [values, handleInputChange] = useForm({
+    name: 'Carlos',
+    email: 'carlos@gmail.com',
+    password: '1233456',
+    password2: '1233456',
+  });
   const {name, email, password, password2} = values;
 
   const handleRegister = e => {
     e.preventDefault();
 
     if (isFormValid()) {
-      // console.log({name, email, password, password2});
+      dispatch(registerWithEmail(email, password, name));
     }
-
-    // dispatch(loginWithEmail(email, password));
   };
 
   const isFormValid = () => {
@@ -61,6 +66,7 @@ const RegisterScreen = () => {
           name="name"
           className="auth__input"
           onChange={handleInputChange}
+          defaultValue={values.name}
         />
         <input
           type="email"
@@ -68,6 +74,7 @@ const RegisterScreen = () => {
           name="email"
           className="auth__input"
           onChange={handleInputChange}
+          defaultValue={values.email}
         />
         <input
           type="password"
@@ -75,6 +82,7 @@ const RegisterScreen = () => {
           name="password"
           className="auth__input"
           onChange={handleInputChange}
+          defaultValue={values.password}
         />
         <input
           type="password"
@@ -82,6 +90,7 @@ const RegisterScreen = () => {
           name="password2"
           className="auth__input"
           onChange={handleInputChange}
+          defaultValue={values.password2}
         />
         <button className="btn btn-primary btn-block mt-5 mb-5" type="submit">
           Register
