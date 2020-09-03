@@ -1,18 +1,25 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import validator from 'validator';
+import {useDispatch, useSelector} from 'react-redux';
+import {uiActions} from '~actions';
 import {useForm} from '~hooks';
 
 const RegisterScreen = () => {
-  const [values, handleInputChange] = useForm({});
+  const dispatch = useDispatch();
+  const {
+    ui: {msgError},
+  } = useSelector(state => state);
 
+  const {setError, removeError} = uiActions;
+  const [values, handleInputChange] = useForm({});
   const {name, email, password, password2} = values;
 
   const handleRegister = e => {
     e.preventDefault();
 
     if (isFormValid()) {
-      console.log({name, email, password, password2});
+      // console.log({name, email, password, password2});
     }
 
     // dispatch(loginWithEmail(email, password));
@@ -21,26 +28,32 @@ const RegisterScreen = () => {
   const isFormValid = () => {
     if (name && email && password && password2) {
       if (name.trim().length === 0) {
-        console.warn('name can not be empty');
+        dispatch(setError('Please enter a name'));
         return false;
       } else if (!validator.isEmail(email)) {
-        console.warn('email is not valid');
+        dispatch(setError('Please enter a valid email'));
         return false;
       } else if (password !== password2 || password.length < 5) {
-        console.warn('password is too short or passwords does not match');
+        dispatch(setError('Password is too short or passwords does not match'));
         return false;
       }
     } else {
-      console.log('form not valid');
+      dispatch(setError('Form can not be empty'));
       return false;
     }
 
+    dispatch(removeError());
     return true;
   };
 
   return (
     <div>
       <h3 className="auth__title">Register</h3>
+      {msgError ? (
+        <div className="alert alert-warning" role="alert">
+          {msgError}
+        </div>
+      ) : null}
       <form onSubmit={handleRegister}>
         <input
           type="text"
