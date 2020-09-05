@@ -4,18 +4,19 @@ import {firebase, googleAuthProvider} from '~firebase/firebase-config';
 // Login
 const loginWithEmail = (email, password) => {
   return dispatch => {
-    setTimeout(() => {
-      dispatch(login(123, 'カルロスさん'));
-    }, 3500);
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(({user}) => dispatch(login(user.uid, user.displayName)));
   };
 };
 
 const loginWithGoogle = () => {
   return dispatch => {
     firebase
-        .auth()
-        .signInWithPopup(googleAuthProvider)
-        .then(({user}) => dispatch(login(user.uid, user.displayName)));
+      .auth()
+      .signInWithPopup(googleAuthProvider)
+      .then(({user}) => dispatch(login(user.uid, user.displayName)));
   };
 };
 
@@ -23,13 +24,13 @@ const loginWithGoogle = () => {
 const registerWithEmail = (email, password, name) => {
   return dispatch => {
     firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(async ({user}) => {
-          await user.updateProfile({displayName: name});
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(async ({user}) => {
+        await user.updateProfile({displayName: name});
 
-          dispatch(login(user.uid, user.displayName));
-        });
+        dispatch(login(user.uid, user.displayName));
+      });
   };
 };
 
